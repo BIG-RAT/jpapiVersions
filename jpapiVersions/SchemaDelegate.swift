@@ -16,7 +16,7 @@ class SchemaDelegate: NSObject, URLSessionDelegate {
     
     func getSchema(serverUrl: String, completion: @escaping (_ returnedToken: [EndpointInfo]) -> Void) {
         
-        var arrayOfPaths = [String]()
+//        var arrayOfPaths = [String]()
         var methods      = [String:Any]()
         
         var endpointsArray = [EndpointInfo]()
@@ -52,14 +52,18 @@ class SchemaDelegate: NSObject, URLSessionDelegate {
                     if let fullSchema = json! as? [String: Any] {
                         if let pathInfo = fullSchema["paths"] as? [String:Any] {
                             for (thePath, _) in pathInfo {
+                                var theVersion = "0"
                                 let tmp = "\(thePath.dropFirst())"
                                 let objectInfoArray = tmp.components(separatedBy: "/")
-                                let theVersion = ( objectInfoArray[0].prefix(1) == "v" ) ? "\(objectInfoArray[0].dropFirst())":"0"
+//                                let theVersion = ( objectInfoArray[0].prefix(1) == "v" ) ? "\(objectInfoArray[0].dropFirst())":"0"
+                                if let _ = Int(objectInfoArray[0].dropFirst()) {
+                                    theVersion = "\(objectInfoArray[0].dropFirst())"
+                                }
                                 let theEndpointPath = ( theVersion == "0" ) ? "\(tmp)":"\(tmp.dropFirst(objectInfoArray[0].count+1))"
                                 methods = pathInfo["\(thePath)"] as! [String : Any]
                                 
                                 
-                                var methodDetails = [String:[String:[String:String]]]()
+                                var methodDetails = [String:[String:String]]()  // [method: [method details]]
 //                                if theEndpointPath == "computer-prestages" {
 //                                    currentEndpoint.name = theEndpointPath
                                     for (method, details) in methods {
@@ -71,22 +75,24 @@ class SchemaDelegate: NSObject, URLSessionDelegate {
                                         var requiredPrivileges = ""
                                         if privileges.count > 0 {
                                             for i in 0..<privileges.count-1 {
-                                                requiredPrivileges.append(privileges[i])
+                                                requiredPrivileges.append(privileges[i] + ", ")
                                             }
                                             requiredPrivileges.append(privileges[privileges.count-1])
                                         }
                                         
-                                        methodDetails["v\(theVersion)"] = ["\(method)":["privileges":"\(requiredPrivileges)", "deprecated": "\(deprecated)", "deprecatedDate":deprecatedDate]]
+                                        methodDetails["\(method)"] = ["privileges":"\(requiredPrivileges)", "deprecated": "\(deprecated)", "deprecatedDate":deprecatedDate]
                                         
                                     }
-                                    currentEndpoint = EndpointInfo(name: theEndpointPath, version: methodDetails)
-                                    endpointsArray.append(currentEndpoint!)
-//                                }
+                                if let indexOfEndpoint = endpointsArray.firstIndex(where: { $0.name == theEndpointPath }) {
+                                    // endpoint already exists
+                                    endpointsArray[indexOfEndpoint].versionInfo.append(VersionInfo(version: "v\(theVersion)", details: methodDetails))
+                                } else {
+//                                    print("version: v\(theVersion)")
+                                    currentEndpoint = EndpointInfo(name: theEndpointPath, versionInfo: [VersionInfo(version: "v\(theVersion)", details: methodDetails)])
+                                }
                                 
-//                                arrayOfPaths.append(theEndpointPath)
+                                endpointsArray.append(currentEndpoint!)
                             }
-//                            arrayOfPaths = arrayOfPaths.sorted()
-                            
                         }
                         
                     } else {    // if let endpointJSON error

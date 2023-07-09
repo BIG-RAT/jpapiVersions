@@ -18,16 +18,10 @@ struct AppInfo {
 
 struct EndpointInfo: Codable {
     var name: String
-    var version: [String:[String:[String:String]]]    // [version: [method: [method_details]]]
+    var versionInfo: [VersionInfo]    // [version: [method: [method_details]]]
 }
 
-
-//class EndpointInfo: NSObject {
-//    var name: String?
-//    var version: [String:[String:[String:Any]]]?     // [version: [method: [method_details]]]
-//
-//    init(name: String, version: [String:[String:[String:Any]]]) {
-//        self.name = name
-//        self.version = version
-//    }
-//}
+struct VersionInfo: Codable {
+    var version: String
+    var details: [String:[String:String]]    // [method: [method_details]]
+}
