@@ -60,7 +60,7 @@ class ViewController: NSViewController {
                 }
                 setVersionButton(whichEndpoint: "\(endpoint_PopUpButton.itemTitle(at: 0))")
                 spinner_ProgressIndicator.stopAnimation(self)
-                Lookup_Button.title = "Lookup"
+//                Lookup_Button.title = "Lookup"
             }
         }
     }
