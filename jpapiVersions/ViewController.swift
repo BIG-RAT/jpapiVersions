@@ -46,6 +46,7 @@ class ViewController: NSViewController {
                 endpointInfo = result
                 if endpointInfo.isEmpty {
                     print("nothing found")
+                    _ = Alert().display(header: "", message: "Nothing found, verify URL and credentials", secondButton: "")
                     spinner_ProgressIndicator.stopAnimation(self)
                     return
                 }
@@ -59,6 +60,7 @@ class ViewController: NSViewController {
                 }
                 setVersionButton(whichEndpoint: "\(endpoint_PopUpButton.itemTitle(at: 0))")
                 spinner_ProgressIndicator.stopAnimation(self)
+                Lookup_Button.title = "Lookup"
             }
         }
     }

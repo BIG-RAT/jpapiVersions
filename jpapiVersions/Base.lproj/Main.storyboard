@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="21701" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" initialViewController="B8D-0N-5wS">
     <dependencies>
+        <deployment identifier="macosx"/>
         <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="21701"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -805,7 +806,7 @@
                                     <constraint firstAttribute="width" constant="500" id="94R-i6-nqo"/>
                                     <constraint firstAttribute="height" constant="24" id="U4y-lh-fev"/>
                                 </constraints>
-                                <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" borderStyle="bezel" drawsBackground="YES" id="ouu-Mc-Twm">
+                                <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" borderStyle="bezel" placeholderString="https://your.jamfPro.server" drawsBackground="YES" id="ouu-Mc-Twm">
                                     <font key="font" metaFont="system" size="16"/>
                                     <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
                                     <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
@@ -835,7 +836,7 @@
                                             <color key="textColor" name="textColor" catalog="System" colorSpace="catalog"/>
                                             <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                             <size key="minSize" width="775" height="198"/>
-                                            <size key="maxSize" width="776" height="10000000"/>
+                                            <size key="maxSize" width="777" height="10000000"/>
                                             <color key="insertionPointColor" name="textColor" catalog="System" colorSpace="catalog"/>
                                         </textView>
                                     </subviews>
@@ -854,12 +855,12 @@
                                 </scroller>
                             </scrollView>
                             <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="FS6-WH-CVu">
-                                <rect key="frame" x="842" y="15" width="75" height="32"/>
+                                <rect key="frame" x="838" y="15" width="79" height="32"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="75" id="87i-Aq-8gb"/>
+                                    <constraint firstAttribute="width" constant="79" id="87i-Aq-8gb"/>
                                     <constraint firstAttribute="height" constant="32" id="mkQ-Ow-3PO"/>
                                 </constraints>
-                                <buttonCell key="cell" type="square" title="Lookup" bezelStyle="shadowlessSquare" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="95i-u1-D1h">
+                                <buttonCell key="cell" type="square" title="Connect" bezelStyle="shadowlessSquare" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="95i-u1-D1h">
                                     <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                     <font key="font" metaFont="system" size="16"/>
                                     <string key="keyEquivalent" base64-UTF8="YES">
